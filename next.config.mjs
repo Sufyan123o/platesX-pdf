@@ -27,6 +27,9 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  postcss: {
+    config: './postcss.config.js'
+  }
 }
 
 if (userConfig) {
