@@ -3,6 +3,20 @@
 import { motion } from "framer-motion"
 
 export default function WearYourStory() {
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId)
+    if (element) {
+      const offset = 80 // Account for header height
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
+  }
+
   return (
     <section className="bg-background py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,8 +37,8 @@ export default function WearYourStory() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <a href="#" className="apple-button inline-flex items-center">
-              Investment Strategies
+            <button onClick={() => scrollToSection("guides")} className="apple-button inline-flex items-center">
+              Investment Guides
               <svg
                 className="w-5 h-5 ml-2"
                 fill="none"
@@ -34,7 +48,7 @@ export default function WearYourStory() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
-            </a>
+            </button>
           </motion.div>
         </motion.div>
       </div>

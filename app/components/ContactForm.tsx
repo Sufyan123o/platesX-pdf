@@ -15,6 +15,7 @@ const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
   phoneNumber: z.string().min(10, { message: "Please enter a valid phone number." }),
   budget: z.string().min(1, { message: "Please enter your budget." }),
+  subject: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
 })
 
@@ -28,6 +29,7 @@ export default function ContactForm() {
       email: "",
       phoneNumber: "",
       budget: "",
+      subject: "",
       message: "",
     },
   })
@@ -44,7 +46,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section className="bg-background py-20">
+    <section id="contact" className="bg-background py-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -97,7 +99,7 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>Phone Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="+1 (555) 000-0000" {...field} />
+                      <Input placeholder="+44 1234 567890" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -118,12 +120,12 @@ export default function ContactForm() {
               />
               <FormField
                 control={form.control}
-                name="plateInterest"
+                name="subject"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Plate Type Interest</FormLabel>
+                    <FormLabel>Subject</FormLabel>
                     <FormControl>
-                      <Input placeholder="Dateless, Name, Initials, etc." {...field} />
+                      <Input placeholder="General Query, Plate Interest, Sales, Support etc." {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -136,7 +138,7 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>Message</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Tell us about your project..." className="min-h-[120px]" {...field} />
+                      <Textarea placeholder="Tell us about your query..." className="min-h-[120px]" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

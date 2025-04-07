@@ -1,9 +1,22 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 
 export default function Hero() {
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId)
+    if (element) {
+      const offset = 80 // Account for header height
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
+  }
+
   return (
     <div className="relative isolate overflow-hidden bg-background">
       <div className="mx-auto max-w-7xl px-6 py-20 lg:flex lg:items-center lg:gap-x-10 lg:px-8">
@@ -14,7 +27,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-gradient">Plate Investment Academy</span>
+            <span className="text-gradient">Welcome to PlatesX</span>
           </motion.h1>
           <motion.p
             className="mt-6 text-lg leading-8 text-muted-foreground"
@@ -31,12 +44,15 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <a href="#" className="apple-button">
+            <button onClick={() => scrollToSection("guides")} className="apple-button">
               Explore Guides
-            </a>
-            <a href="#" className="text-sm font-semibold leading-6 text-foreground">
-              Free Valuation <span aria-hidden="true">→</span>
-            </a>
+            </button>
+            <button 
+              onClick={() => scrollToSection("contact")} 
+              className="text-sm font-semibold leading-6 text-foreground"
+            >
+              Contact Us <span aria-hidden="true">→</span>
+            </button>
           </motion.div>
         </div>
         <motion.div
@@ -45,14 +61,13 @@ export default function Hero() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <div className="relative aspect-square w-full max-w-md mx-auto mt-10 lg:mt-0">
-            <Image
-              src="/plateslogo.png"
-              alt="Feature Illustration"
+          <div className="relative">
+            <img
+              src="/plateslogo.png?height=600&width=600"
+              alt="UK Private Registration Plate"
               width={600}
               height={600}
-              className="rounded-2xl shadow-xl animate-float"
-              priority
+              className="w-[500px] rounded-2xl shadow-xl ring-1 ring-gray-900/10"
             />
           </div>
         </motion.div>

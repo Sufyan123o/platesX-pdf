@@ -18,7 +18,7 @@ export default function AboutUs() {
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }}>
             <h3 className="text-3xl font-bold mb-4 text-white">We are Creative Innovators</h3>
             <p className="text-gray-300 mb-6">
-              At CreativeAgency, we blend cutting-edge technology with artistic vision to create digital experiences
+              At PlatesX, we blend cutting-edge technology with artistic vision to create digital experiences
               that captivate and inspire. Our team of passionate designers, developers, and strategists work tirelessly
               to push the boundaries of what's possible in the digital realm.
             </p>

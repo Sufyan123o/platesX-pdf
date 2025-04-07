@@ -12,6 +12,20 @@ export default function Header() {
 
   useEffect(() => setMounted(true), [])
 
+  const scrollToSection = (elementId: string) => {
+    const element = document.getElementById(elementId)
+    if (element) {
+      const offset = 80 // Account for header height
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - offset
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      })
+    }
+  }
+
   return (
     <motion.header
       className="sticky top-0 z-50 bg-background/80 backdrop-blur-md"
@@ -22,33 +36,33 @@ export default function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Plate Investment Academy</span>
+            <span className="sr-only">PlatesX</span>
             <img
               className="h-8 w-auto"
               src="/plateslogo.png?height=50&width=200"
-              alt="Plate Investment Academy Logo"
+              alt="PlatesX Logo"
             />
           </Link>
         </div>
         <div className="flex gap-x-12">
-          <Link
-            href="#"
+          <button
+            onClick={() => scrollToSection("guides")}
             className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
           >
             Guides
-          </Link>
-          <Link
-            href="#"
+          </button>
+          <button
+            onClick={() => scrollToSection("listings")}
             className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
           >
-            Valuation
-          </Link>
-          <Link
-            href="#"
+            Buy
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
             className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
           >
             Contact
-          </Link>
+          </button>
         </div>
         <div className="flex flex-1 justify-end">
           {mounted && (

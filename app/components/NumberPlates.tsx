@@ -44,7 +44,7 @@ const categories = ["All", ...new Set(plates.map(plate => plate.category))]
 
 export default function NumberPlates() {
     return (
-        <section className="w-full py-12">
+        <section id="listings" className="w-full py-12">
             <div className="container">
                 <h2 className="text-3xl font-bold text-center mb-8">Available Number Plates</h2>
                 <Tabs defaultValue="All" className="w-full">
