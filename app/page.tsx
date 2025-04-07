@@ -6,12 +6,14 @@ import Timeline from "./components/Timeline"
 import Marquee from "./components/Marquee"
 import ContactForm from "./components/ContactForm"
 import NewsletterSubscribe from "./components/NewsletterSubscribe"
+import NumberPlates from "./components/NumberPlates"
 
 export default function Home() {
   return (
     <>
       <Hero />
       <WearYourStory />
+      <NumberPlates />
       <FeatureCarousel />
       <RegistrationGuides />
       <Timeline />
