@@ -1,3 +1,5 @@
+"use client"
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -5,50 +7,50 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 const plates = [
     {
         id: 1,
-        number: "ABC 123",
-        price: 12500,
+        number: "5 UFS",
+        price: 49995,
         category: "Dateless",
-        description: "Classic dateless combination"
+        description: "Premium short dateless combination"
     },
     {
         id: 2,
-        number: "VIP 1",
-        price: 250000,
-        category: "Premium",
-        description: "Exclusive VIP plate"
+        number: "921 A",
+        price: 34995,
+        category: "Dateless",
+        description: "Unique dateless registration"
     },
     {
         id: 3,
-        number: "S1 NGH",
-        price: 15000,
+        number: "ROS 17E",
+        price: 14995,
         category: "Name",
-        description: "Perfect for SINGH"
-    },
-    {
-        id: 4,
-        number: "F1 RST",
-        price: 175000,
-        category: "Premium",
-        description: "Highly desirable FIRST plate"
-    },
-    {
-        id: 5,
-        number: "22 AA",
-        price: 45000,
-        category: "Dateless",
-        description: "Short dateless combination"
+        description: "Perfect for ROSIE"
     }
 ]
 
 const categories = ["All", ...new Set(plates.map(plate => plate.category))]
 
 export default function NumberPlates() {
+    const scrollToSection = (elementId: string) => {
+        const element = document.getElementById(elementId)
+        if (element) {
+            const offset = 80 // Account for header height
+            const elementPosition = element.getBoundingClientRect().top
+            const offsetPosition = elementPosition + window.pageYOffset - offset
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            })
+        }
+    }
+
     return (
         <section id="listings" className="w-full py-12">
             <div className="container">
                 <h2 className="text-3xl font-bold text-center mb-8">Available Number Plates</h2>
                 <Tabs defaultValue="All" className="w-full">
-                    <TabsList className="grid w-full grid-cols-3 lg:grid-cols-4 mb-8">
+                    <TabsList className="grid w-full grid-cols-3 lg:grid-cols-3 mb-8">
                         {categories.map((category) => (
                             <TabsTrigger key={category} value={category}>
                                 {category}
@@ -61,7 +63,7 @@ export default function NumberPlates() {
                                 {plates
                                     .filter(plate => category === "All" || plate.category === category)
                                     .map(plate => (
-                                        <Card key={plate.id}>
+                                        <Card key={plate.id} className="hover:shadow-lg transition-shadow">
                                             <CardHeader>
                                                 <CardTitle className="text-2xl font-bold text-center">
                                                     {plate.number}
@@ -75,7 +77,10 @@ export default function NumberPlates() {
                                                     <p className="text-xl font-semibold">
                                                         £{plate.price.toLocaleString()}
                                                     </p>
-                                                    <button className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-lg">
+                                                    <button 
+                                                        onClick={() => scrollToSection("contact")}
+                                                        className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-lg"
+                                                    >
                                                         Enquire Now
                                                     </button>
                                                 </div>
