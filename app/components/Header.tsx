@@ -43,23 +43,23 @@ export default function Header() {
               alt="PlatesX Logo"
             />
           </Link>
-        </div>
-        <div className="flex gap-x-12">
-          <button
-            onClick={() => scrollToSection("guides")}
-            className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
-          >
+        </div>        <div className="flex gap-x-4 md:gap-x-8">          <Link href="/guides" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
             Guides
-          </button>
-          <button
-            onClick={() => scrollToSection("listings")}
-            className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
-          >
+          </Link>
+          <Link href="/buy" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
             Buy
-          </button>
+          </Link>
+          <Link href="/sell" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
+            Sell
+          </Link>
+          <Link href="/sourcing" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
+            Sourcing
+          </Link>
           <button
-            onClick={() => scrollToSection("contact")}
-            className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors"
+            onClick={() => window.location.pathname === "/" 
+              ? scrollToSection("contact") 
+              : window.location.href = "/#contact"}
+            className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors cursor-pointer"
           >
             Contact
           </button>

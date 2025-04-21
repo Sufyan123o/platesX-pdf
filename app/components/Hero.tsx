@@ -28,15 +28,13 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
           >
             <span className="text-gradient">Welcome to PlatesX</span>
-          </motion.h1>
-          <motion.p
+          </motion.h1>          <motion.p
             className="mt-6 text-lg leading-8 text-muted-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Your trusted resource for UK private registration plates investment education. Learn how to build wealth
-            through cherished marks.
+            Your trusted experts for buying, selling and sourcing UK private registration plates. Premium plates and expert guidance to help you find the perfect match.
           </motion.p>
           <motion.div
             className="mt-10 flex items-center gap-x-6"

@@ -11,8 +11,8 @@ const inter = Inter({
 })
 
 export const metadata = {
-  title: "Plate Investment Academy | UK Private Registration Plates",
-  description: "Expert education on investing in UK private registration number plates",
+  title: "PlatesX | UK Private Registration Plates",
+  description: "Expert sourcing, buying and selling of UK private registration number plates",
   generator: 'v0.dev'
 }
 
@@ -23,8 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-background text-foreground`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <body className={`${inter.className} min-h-screen bg-background text-foreground`}>        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Header />
           <main>{children}</main>
           <Footer />

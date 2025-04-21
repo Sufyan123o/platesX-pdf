@@ -15,19 +15,9 @@ const features = [
     icon: "📈",
   },
   {
-    title: "Legal Support",
-    description: "Clear explanations of the legal aspects of buying, selling, and transferring plates.",
-    icon: "⚖️",
-  },
-  {
     title: "Investment Strategies",
     description: "Proven approaches to building a valuable portfolio of registration numbers.",
     icon: "💰",
-  },
-  {
-    title: "Valuation Tools",
-    description: "Resources to help you accurately value private registration plates.",
-    icon: "🔍",
   },
 ]
 
