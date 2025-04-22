@@ -132,13 +132,6 @@ export default function SourcingPage() {
                                 <li>We handle the entire purchase process if you decide to proceed</li>
                             </ol>
                         </div>
-                        <div className="bg-primary/10 p-6 rounded-lg">
-                            <p className="font-semibold">Success Stories:</p>
-                            <blockquote className="italic border-l-2 border-primary pl-4 mt-2">
-                                "PlatesX found me the perfect investment plate as I was looking to grow my portfolio. Their service and guidance was exceptional and the price was better than I expected."
-                                <footer className="text-sm mt-1">— Shahid S., New Investor</footer>
-                            </blockquote>
-                        </div>
                     </motion.div>
 
                     <motion.div
