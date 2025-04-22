@@ -10,22 +10,24 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle, CheckCircle2 } from "lucide-react"
+import { AlertCircle, CheckCircle2, ShoppingCart } from "lucide-react"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   phoneNumber: z.string().min(10, { message: "Please enter a valid phone number." }),
   budget: z.string().min(1, { message: "Please enter your budget." }),
+  plateNumber: z.string().min(1, { message: "Please enter the plate you're interested in." }),
   subject: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
-  formType: z.string().default("general"),
+  formType: z.string().default("buying"),
 })
 
-export default function ContactForm() {
+export default function BuyingForm({ plate = "" }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [statusMessage, setStatusMessage] = useState("")
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -33,11 +35,13 @@ export default function ContactForm() {
       email: "",
       phoneNumber: "",
       budget: "",
-      subject: "",
+      plateNumber: plate, // Pre-fill with plate param if provided
+      subject: plate ? `Interest in plate: ${plate}` : "Buying Enquiry",
       message: "",
-      formType: "general",
+      formType: "buying",
     },
   })
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
     setSubmitStatus('idle')
@@ -64,7 +68,7 @@ export default function ContactForm() {
       }
       
       setSubmitStatus('success')
-      setStatusMessage("Thank you for your message. We'll get back to you soon!")
+      setStatusMessage("Thank you for your enquiry. We'll get back to you soon about this plate!")
       form.reset()
     } catch (error) {
       console.error('Error submitting form:', error)
@@ -76,7 +80,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="bg-background py-20">
+    <section id="buy-enquiry" className="bg-background py-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -84,9 +88,9 @@ export default function ContactForm() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl mb-4">Get in Touch</h2>
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl mb-4">Enquire About A Plate For Sale</h2>
           <p className="text-lg text-muted-foreground">
-            We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.
+            Fill out the form below and we'll get in touch about this plate.
           </p>
         </motion.div>
         
@@ -118,6 +122,19 @@ export default function ContactForm() {
 
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="plateNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Plate of Interest</FormLabel>
+                    <FormControl>
+                      <Input placeholder="ABC 123" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="name"
@@ -162,7 +179,7 @@ export default function ContactForm() {
                 name="budget"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Investment Budget</FormLabel>
+                    <FormLabel>Budget</FormLabel>
                     <FormControl>
                       <Input placeholder="£1,000 - £50,000" {...field} />
                     </FormControl>
@@ -177,7 +194,7 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>Subject</FormLabel>
                     <FormControl>
-                      <Input placeholder="General Query, Plate Interest, Sales, Support etc." {...field} />
+                      <Input placeholder="Plate Enquiry" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -190,14 +207,15 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>Message</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Tell us about your query..." className="min-h-[120px]" {...field} />
+                      <Textarea placeholder="Tell us about your interest in this plate..." className="min-h-[120px]" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? "Sending..." : "Submit Enquiry"}
+                {!isSubmitting && <ShoppingCart className="ml-2 h-4 w-4" />}
               </Button>
             </form>
           </Form>
@@ -206,4 +224,3 @@ export default function ContactForm() {
     </section>
   )
 }
-

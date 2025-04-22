@@ -1,37 +1,46 @@
 "use client"
 
+import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import BuyingForm from "../components/BuyingForm"
+import UKPlate from "../components/UKPlate"
 
 // Example plate listings - in a real app, this would come from an API or database
 const plates = [
     {
         id: 1,
-        number: "5 UFS",
-        price: 49995,
-        category: "Dateless",
-        description: "Perfect for Sufyan or Yusuf"
+        number: "S1 TAL",
+        price: 22000,
+        category: "Other",
     },
     {
         id: 2,
-        number: "921 A",
-        price: 34995,
+        number: "5 UFS",
+        price: 49995,
         category: "Dateless",
-        description: "Premium short dateless combination"
     },
     {
         id: 3,
+        number: "921 A",
+        price: 34995,
+        category: "Dateless",
+    },
+    {
+        id: 4,
         number: "ROS 17E",
         price: 14995,
-        category: "Name",
-        description: "Perfect for ROSIE"
+        category: "Other",
     }
 ]
 
 const categories = ["All", ...new Set(plates.map(plate => plate.category))]
 
 export default function BuyPage() {
+    const [selectedPlate, setSelectedPlate] = useState("")
+    
     const scrollToSection = (elementId: string) => {
         const element = document.getElementById(elementId)
         if (element) {
@@ -81,27 +90,29 @@ export default function BuyPage() {
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ duration: 0.3 }}
-                                        >
-                                            <Card className="hover:shadow-lg transition-shadow">
-                                                <CardHeader>
-                                                    <CardTitle className="text-2xl font-bold text-center">
-                                                        {plate.number}
-                                                    </CardTitle>
+                                        >                                            <Card className="hover:shadow-lg transition-shadow">
+                                                <CardHeader className="pb-2">                                                    <div className="mx-auto w-full max-w-[280px] mb-4">
+                                                        <UKPlate 
+                                                            number={plate.number} 
+                                                            plateStyle="yellow"
+                                                        />
+                                                    </div>
                                                     <CardDescription className="text-center">
                                                         {plate.description}
                                                     </CardDescription>
                                                 </CardHeader>
-                                                <CardContent>
-                                                    <div className="text-center">
-                                                        <p className="text-xl font-semibold">
+                                                <CardContent>                                                    <div className="text-center">                                                        <p className="text-xl font-semibold">
                                                             £{plate.price.toLocaleString()}
                                                         </p>
-                                                        <a 
-                                                            href="/contact"
-                                                            className="mt-4 inline-block bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-lg"
+                                                        <Button 
+                                                            onClick={() => {
+                                                                setSelectedPlate(plate.number);
+                                                                scrollToSection('buy-enquiry-form');
+                                                            }}
+                                                            className="mt-4"
                                                         >
                                                             Enquire Now
-                                                        </a>
+                                                        </Button>
                                                     </div>
                                                 </CardContent>
                                             </Card>
@@ -112,6 +123,10 @@ export default function BuyPage() {
                     ))}
                 </Tabs>
                 
+                {/* Add BuyingForm at the bottom of the page */}
+                <div id="buy-enquiry-form" className="mt-20">
+                    <BuyingForm plate={selectedPlate} />
+                </div>
                 <div className="mt-16 text-center">
                     <p className="text-lg text-muted-foreground mb-6">
                         Can't find what you're looking for? We have access to thousands more plates not listed here.
@@ -121,8 +136,8 @@ export default function BuyPage() {
                         className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-lg font-medium text-primary-foreground shadow-lg transition-colors hover:bg-primary/90"
                     >
                         Ask Us to Find Your Perfect Plate
-                    </a>
-                </div>
+                    </a>                </div>
+                
             </div>
         </section>
     )

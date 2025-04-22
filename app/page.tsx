@@ -5,14 +5,16 @@ import Timeline from "./components/Timeline"
 import Marquee from "./components/Marquee"
 import ContactForm from "./components/ContactForm"
 import NewsletterSubscribe from "./components/NewsletterSubscribe"
+import F1Showcase from "./components/F1Showcase"
 
 export default function Home() {
   return (
     <>
       <Hero />
       <WearYourStory />
+      <F1Showcase />
       <FeatureCarousel />
-      <Timeline />
+      {/* <Timeline /> */}
       <Marquee />
       <ContactForm />
       <NewsletterSubscribe />

@@ -22,16 +22,35 @@ export default function NewsletterSubscribe() {
       email: "",
     },
   })
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
-    // Simulate API call
-    setTimeout(() => {
-      console.log(values)
-      setIsSubmitting(false)
+    
+    try {
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: values.email,
+          source: "Newsletter Form"
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong')
+      }
+      
       form.reset()
       alert("Thank you for subscribing to our newsletter!")
-    }, 2000)
+    } catch (error) {
+      console.error('Error submitting newsletter form:', error)
+      alert('Failed to subscribe. Please try again later.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (

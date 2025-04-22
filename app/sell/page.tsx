@@ -22,11 +22,13 @@ const formSchema = z.object({
     bottomPrice: z.string().min(1, { message: "Please enter your minimum acceptable price." }),
     subject: z.string().min(1, { message: "Please enter a subject." }),
     message: z.string().optional(),
+    formType: z.string().default("selling"),
 })
 
 export default function SellPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
+    const [statusMessage, setStatusMessage] = useState("")
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -38,22 +40,49 @@ export default function SellPage() {
             onRetention: "no",
             listPrice: "",
             bottomPrice: "",
-            subject: "",
+            subject: "Selling Request",
             message: "",
+            formType: "selling",
         },
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true)
 
-        // In a real application, you would send this data to your server/API
-        console.log(values)
-
-        // Simulate API call
-        setTimeout(() => {
-            setIsSubmitting(false)
+        try {
+            // Send data to the API with Discord webhook integration
+            console.log("Sending data to API...");
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...values,
+                    phoneNumber: values.phone, // Map to match API expectations
+                    plateToSell: values.plateNumber, // Map to match API expectations
+                    askingPrice: values.listPrice, // Map to match API expectations
+                    formType: "selling", // Ensure this goes to the selling webhook
+                }),
+            });
+            
+            console.log("API response status:", response.status);
+            
+            const data = await response.json();
+            console.log("API response data:", data);
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Something went wrong')
+            }
+            
             setIsSubmitted(true)
-        }, 1500)
+            setStatusMessage("Thank you for submitting your plate details. Our team will be in touch shortly!")
+        } catch (error) {
+            console.error('Error submitting form:', error)
+            setStatusMessage(error instanceof Error ? error.message : 'Failed to send your request. Please try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -79,7 +108,6 @@ export default function SellPage() {
                                 <li>Competitive commission - only pay when your plate sells</li>
                                 <li>Expert valuation and advice to maximize your plate's value</li>
                                 <li>Secure handling of all paperwork and DVLA procedures</li>
-                                <li>Trusted by hundreds of satisfied customers</li>
                             </ul>
                         </div>
                         <div className="space-y-4">
@@ -103,7 +131,7 @@ export default function SellPage() {
                         {isSubmitted ? (
                             <div className="bg-green-50 dark:bg-green-900/20 p-8 rounded-lg space-y-4 text-center">
                                 <h3 className="text-2xl font-bold text-green-600 dark:text-green-400">Request Submitted Successfully!</h3>
-                                <p>Thank you for choosing to sell your plate with us. One of our specialists will contact you shortly to discuss your plate valuation and next steps.</p>
+                                <p>{statusMessage}</p>
                                 <Button onClick={() => setIsSubmitted(false)} variant="outline">Submit Another Request</Button>
                             </div>
                         ) : (

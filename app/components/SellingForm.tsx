@@ -10,34 +10,38 @@ import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { AlertCircle, CheckCircle2 } from "lucide-react"
+import { AlertCircle, CheckCircle2, PoundSterling } from "lucide-react"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   phoneNumber: z.string().min(10, { message: "Please enter a valid phone number." }),
-  budget: z.string().min(1, { message: "Please enter your budget." }),
+  plateToSell: z.string().min(1, { message: "Please enter the plate you want to sell." }),
+  askingPrice: z.string().optional(),
   subject: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
-  formType: z.string().default("general"),
+  formType: z.string().default("selling"),
 })
 
-export default function ContactForm() {
+export default function SellingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [statusMessage, setStatusMessage] = useState("")
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
       phoneNumber: "",
-      budget: "",
-      subject: "",
+      plateToSell: "",
+      askingPrice: "",
+      subject: "Selling Enquiry",
       message: "",
-      formType: "general",
+      formType: "selling",
     },
   })
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
     setSubmitStatus('idle')
@@ -64,7 +68,7 @@ export default function ContactForm() {
       }
       
       setSubmitStatus('success')
-      setStatusMessage("Thank you for your message. We'll get back to you soon!")
+      setStatusMessage("Thank you for your submission. We'll be in touch soon about your plate!")
       form.reset()
     } catch (error) {
       console.error('Error submitting form:', error)
@@ -76,7 +80,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section id="contact" className="bg-background py-20">
+    <section id="sell-enquiry" className="bg-background py-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -84,9 +88,9 @@ export default function ContactForm() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl mb-4">Get in Touch</h2>
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl mb-4">Sell Your Plate</h2>
           <p className="text-lg text-muted-foreground">
-            We'd love to hear from you. Fill out the form below and we'll get back to you as soon as possible.
+            Tell us about the plate you wish to sell and we'll get back to you with an offer.
           </p>
         </motion.div>
         
@@ -159,12 +163,12 @@ export default function ContactForm() {
               />
               <FormField
                 control={form.control}
-                name="budget"
+                name="plateToSell"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Investment Budget</FormLabel>
+                    <FormLabel>Plate Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="£1,000 - £50,000" {...field} />
+                      <Input placeholder="ABC 123" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -172,12 +176,12 @@ export default function ContactForm() {
               />
               <FormField
                 control={form.control}
-                name="subject"
+                name="askingPrice"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Subject</FormLabel>
+                    <FormLabel>Asking Price (Optional)</FormLabel>
                     <FormControl>
-                      <Input placeholder="General Query, Plate Interest, Sales, Support etc." {...field} />
+                      <Input placeholder="£5,000" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -188,16 +192,17 @@ export default function ContactForm() {
                 name="message"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Message</FormLabel>
+                    <FormLabel>Additional Details</FormLabel>
                     <FormControl>
-                      <Textarea placeholder="Tell us about your query..." className="min-h-[120px]" {...field} />
+                      <Textarea placeholder="Tell us more about your plate, when you acquired it, etc..." className="min-h-[120px]" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
               <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {isSubmitting ? "Sending..." : "Submit Plate for Valuation"}
+                {!isSubmitting && <PoundSterling className="ml-2 h-4 w-4" />}
               </Button>
             </form>
           </Form>
@@ -206,4 +211,3 @@ export default function ContactForm() {
     </section>
   )
 }
-

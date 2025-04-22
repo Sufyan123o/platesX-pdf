@@ -3,33 +3,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-// Example plate listings - in a real app, this would come from an API or database
-const plates = [
-    {
-        id: 1,
-        number: "5 UFS",
-        price: 49995,
-        category: "Dateless",
-        description: "Premium short dateless combination"
-    },
-    {
-        id: 2,
-        number: "921 A",
-        price: 34995,
-        category: "Dateless",
-        description: "Unique dateless registration"
-    },
-    {
-        id: 3,
-        number: "ROS 17E",
-        price: 14995,
-        category: "Name",
-        description: "Perfect for ROSIE"
-    }
-]
-
-const categories = ["All", ...new Set(plates.map(plate => plate.category))]
-
 export default function NumberPlates() {
     const scrollToSection = (elementId: string) => {
         const element = document.getElementById(elementId)

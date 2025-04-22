@@ -33,8 +33,7 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">        <div className="hidden md:flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">PlatesX</span>
             <img
@@ -68,10 +67,7 @@ export default function Header() {
           >
             Contact
           </button>
-        </div>
-
-
-        <div className="flex flex-1 justify-end">
+        </div>        <div className="hidden md:flex flex-1 justify-end">
           {mounted && (
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}

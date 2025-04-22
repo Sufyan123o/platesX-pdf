@@ -31,11 +31,13 @@ const formSchema = z.object({
     budget: z.string().min(1, { message: "Please enter your budget." }),
     timeframe: z.string().min(1, { message: "Please select a timeframe." }),
     message: z.string().optional(),
+    formType: z.string().default("sourcing"),
 })
 
 export default function SourcingPage() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
+    const [statusMessage, setStatusMessage] = useState("")
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -48,20 +50,50 @@ export default function SourcingPage() {
             budget: "",
             timeframe: "",
             message: "",
+            formType: "sourcing",
         },
     })
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         setIsSubmitting(true)
 
-        // In a real application, you would send this data to your server/API
-        console.log(values)
-
-        // Simulate API call
-        setTimeout(() => {
-            setIsSubmitting(false)
+        try {
+            // Send data to the API with Discord webhook integration
+            console.log("Sending data to API...");
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: values.name,
+                    email: values.email,
+                    phoneNumber: values.phone,
+                    budget: values.budget,
+                    desiredPlate: values.desiredPlate,
+                    message: `${values.message || ''}\nPlate Types: ${values.plateTypes.join(', ')}\nTimeframe: ${values.timeframe}`,
+                    subject: "Sourcing Request",
+                    formType: "sourcing", // Ensure this goes to the sourcing webhook
+                }),
+            });
+            
+            console.log("API response status:", response.status);
+            
+            const data = await response.json();
+            console.log("API response data:", data);
+            
+            if (!response.ok) {
+                throw new Error(data.error || 'Something went wrong')
+            }
+            
             setIsSubmitted(true)
-        }, 1500)
+            setStatusMessage("Thank you for your sourcing request. One of our plate specialists will be in touch shortly to discuss your requirements and provide suitable options.")
+        } catch (error) {
+            console.error('Error submitting form:', error)
+            setStatusMessage(error instanceof Error ? error.message : 'Failed to send your request. Please try again.')
+        } finally {
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -118,7 +150,7 @@ export default function SourcingPage() {
                         {isSubmitted ? (
                             <div className="bg-green-50 dark:bg-green-900/20 p-8 rounded-lg space-y-4 text-center">
                                 <h3 className="text-2xl font-bold text-green-600 dark:text-green-400">Request Submitted Successfully!</h3>
-                                <p>Thank you for your sourcing request. One of our plate specialists will be in touch shortly to discuss your requirements and provide suitable options.</p>
+                                <p>{statusMessage}</p>
                                 <Button onClick={() => setIsSubmitted(false)} variant="outline">Submit Another Request</Button>
                             </div>
                         ) : (
