@@ -8,16 +8,19 @@ const features = [
     title: "Expert Guidance",
     description: "Comprehensive resources from industry specialists with decades of experience.",
     icon: "🏆",
+    link: "/guides"
   },
   {
-    title: "Market Analysis",
-    description: "Up-to-date insights on the private plate market trends and investment opportunities.",
-    icon: "📈",
+    title: "Plate Sourcing",
+    description: "Our expert team can find your perfect plate, even if it's not currently advertised.",
+    icon: "🔍",
+    link: "/sourcing"
   },
   {
-    title: "Investment Strategies",
-    description: "Proven approaches to building a valuable portfolio of registration numbers.",
+    title: "Sell Your Plates",
+    description: "Let us handle the sale of your plates with our professional service and 5% commission.",
     icon: "💰",
+    link: "/sell"
   },
 ]
 
@@ -65,9 +68,8 @@ export default function FeatureCarousel() {
                   <div className="text-4xl mb-4">{feature.icon}</div>
                   <h3 className="text-xl font-semibold mb-2 text-foreground">{feature.title}</h3>
                   <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-                <div className="mt-4">
-                  <a href="#" className="text-primary hover:underline">
+                </div>                <div className="mt-4">
+                  <a href={feature.link} className="text-primary hover:underline">
                     Learn more →
                   </a>
                 </div>

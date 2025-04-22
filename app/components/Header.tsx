@@ -38,12 +38,17 @@ export default function Header() {
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">PlatesX</span>
             <img
-              className="h-8 w-auto"
+              className="h-12 w-auto"
               src="/plateslogo.png?height=50&width=200"
               alt="PlatesX Logo"
             />
           </Link>
-        </div>        <div className="flex gap-x-4 md:gap-x-8">          <Link href="/guides" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
+        </div>
+        
+        <div className="flex gap-x-4 md:gap-x-8">
+          <Link href="/" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
+            Home
+          </Link>          <Link href="/guides" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
             Guides
           </Link>
           <Link href="/buy" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
@@ -64,6 +69,8 @@ export default function Header() {
             Contact
           </button>
         </div>
+
+
         <div className="flex flex-1 justify-end">
           {mounted && (
             <button

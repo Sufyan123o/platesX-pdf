@@ -36,8 +36,10 @@ export default function WearYourStory() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            <button onClick={() => scrollToSection("guides")} className="apple-button inline-flex items-center">
+          >            <button  
+              onClick={() => window.location.href = "/guides"} 
+              className="apple-button inline-flex items-center"
+            >
               Investment Guides
               <svg
                 className="w-5 h-5 ml-2"
