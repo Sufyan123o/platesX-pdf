@@ -18,18 +18,24 @@ const plates = [
     },
     {
         id: 2,
+        number: "KAM 1E",
+        price: 8000,
+        category: "Other",
+    },
+    {
+        id: 3,
         number: "5 UFS",
         price: 49995,
         category: "Dateless",
     },
     {
-        id: 3,
+        id: 4,
         number: "921 A",
         price: 34995,
         category: "Dateless",
     },
     {
-        id: 4,
+        id: 5,
         number: "ROS 17E",
         price: 14995,
         category: "Other",

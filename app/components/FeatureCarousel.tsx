@@ -18,7 +18,7 @@ const features = [
   },
   {
     title: "Sell Your Plates",
-    description: "Let us handle the sale of your plates with our professional service and 5% commission.",
+    description: "Let us handle the sale of your plates with our professional service.",
     icon: "💰",
     link: "/sell"
   },

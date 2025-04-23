@@ -47,9 +47,7 @@ export default function Header() {
         <div className="flex gap-x-4 md:gap-x-8">
           <Link href="/" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
             Home
-          </Link>          <Link href="/guides" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
-            Guides
-          </Link>
+          </Link>          
           <Link href="/buy" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
             Buy
           </Link>
@@ -58,6 +56,9 @@ export default function Header() {
           </Link>
           <Link href="/sourcing" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
             Sourcing
+          </Link>
+          <Link href="/guides" className="text-sm font-semibold leading-6 text-foreground hover:text-primary transition-colors">
+            Guides
           </Link>
           <button
             onClick={() => window.location.pathname === "/" 

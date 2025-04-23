@@ -41,8 +41,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Your trusted place for UK private registration plates investments. Learn how to build wealth
-            through cherished marks.
+          Your trusted partner in UK private plates; expertly buying, selling and sourcing cherished registrations.
           </motion.p>
           <motion.div
             className="mt-10 flex items-center gap-x-6"
