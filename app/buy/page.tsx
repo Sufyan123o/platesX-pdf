@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import BuyingForm from "../components/BuyingForm"
 import UKPlate from "../components/UKPlate"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 // Example plate listings - in a real app, this would come from an API or database
 const plates = [
@@ -167,6 +168,7 @@ const categories = ["All", ...new Set(plates.map(plate => plate.category))]
 
 export default function BuyPage() {
     const [selectedPlate, setSelectedPlate] = useState("")
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc")
     
     const scrollToSection = (elementId: string) => {
         const element = document.getElementById(elementId)
@@ -198,6 +200,18 @@ export default function BuyPage() {
                     </p>
                 </motion.div>
 
+                <div className="flex justify-end mb-6">
+                    <Select value={sortOrder} onValueChange={(value: "asc" | "desc") => setSortOrder(value)}>
+                        <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Sort by price" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="asc">Price: Low to High</SelectItem>
+                            <SelectItem value="desc">Price: High to Low</SelectItem>
+                        </SelectContent>
+                    </Select>
+                </div>
+
                 <Tabs defaultValue="All" className="w-full">
                     <TabsList className="grid w-full grid-cols-3 lg:grid-cols-3 mb-8">
                         {categories.map((category) => (
@@ -211,6 +225,7 @@ export default function BuyPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {plates
                                     .filter(plate => category === "All" || plate.category === category)
+                                    .sort((a, b) => sortOrder === "asc" ? a.price - b.price : b.price - a.price)
                                     .map(plate => (
                                         <motion.div
                                             key={plate.id}
