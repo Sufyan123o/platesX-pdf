@@ -268,19 +268,19 @@ export default function WaitlistPage() {
                     {[
                         {
                             q: "How much will the guides cost?",
-                            a: "It will be completely free of charge for waitlist members."
-                        },
-                        {
-                            q: "Will the guide offer investment plates?",
-                            a: "No, the guide will not offer investment plates. It will focus on information and tips for beginners to start investing in plates."
+                            a: "It will be completely FREE of charge for waitlist members."
                         },
                         {
                             q: "How do I secure the guide early?",
-                            a: "By joining the waitlist, you'll receive early access to purchase the guide before it goes public."
+                            a: "By joining the waitlist, you'll receive early access to the guide before it goes public."
                         },
                         {
-                            q: "Are there any fees to join the waitlist?",
-                            a: "No, joining the waitlist is completely free with no obligation to purchase."
+                            q: "What kind of plates should beginners focus on?",
+                            a: "The guide will help you identify undervalued plates with strong potential, focusing on patterns that have historically performed well. We'll teach you how to spot opportunities and avoid common pitfalls in the plate market."
+                        },
+                        {
+                            q: "What support will I get as a waitlist member?",
+                            a: "As a waitlist member, you'll receive priority access to the guide, exclusive market updates, and early notifications about new plate opportunities. Plus, you'll be part of our community of like-minded investors."
                         }
                     ].map((faq, i) => (
                         <motion.div

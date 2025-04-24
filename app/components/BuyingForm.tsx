@@ -16,7 +16,6 @@ const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   phoneNumber: z.string().min(10, { message: "Please enter a valid phone number." }),
-  budget: z.string().min(1, { message: "Please enter your budget." }),
   plateNumber: z.string().min(1, { message: "Please enter the plate you're interested in." }),
   subject: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }),
@@ -34,7 +33,6 @@ export default function BuyingForm({ plate = "" }) {
       name: "",
       email: "",
       phoneNumber: "",
-      budget: "",
       plateNumber: plate, // Pre-fill with plate param if provided
       subject: plate ? `Interest in plate: ${plate}` : "Buying Enquiry",
       message: "",
@@ -169,19 +167,6 @@ export default function BuyingForm({ plate = "" }) {
                     <FormLabel>Phone Number</FormLabel>
                     <FormControl>
                       <Input placeholder="+44 1234 567890" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="budget"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Budget</FormLabel>
-                    <FormControl>
-                      <Input placeholder="£1,000 - £50,000" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

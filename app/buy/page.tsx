@@ -39,8 +39,129 @@ const plates = [
         number: "ROS 17E",
         price: 14995,
         category: "Other",
+    },
+    {
+        id: 6,
+        number: "X1 SUF",
+        price: 4995,
+        category: "Other",
+    },
+    {
+        id: 7,
+        number: "3 PA",
+        price: 49995,
+        category: "Dateless",
+    },
+    {
+        id: 8,
+        number: "W5 UFS",
+        price: 550,
+        category: "Other",
+    },
+    {
+        id: 9,
+        number: "64 B",
+        price: 54995,
+        category: "Dateless",
+    },
+    {
+        id: 10,
+        number: "333 MRY",
+        price: 3995,
+        category: "Other",
+    },
+    {
+        id: 11,
+        number: "82 XX",
+        price: 17995,
+        category: "Dateless",
+    },
+    {
+        id: 12,
+        number: "FH 6",
+        price: 39995,
+        category: "Dateless",
+    },
+    {
+        id: 13,
+        number: "FX 6",
+        price: 34995,
+        category: "Dateless",
+    },
+    {
+        id: 14,
+        number: "72 P",
+        price: 45000,
+        category: "Dateless",
+    },
+    {
+        id: 15,
+        number: "34 A",
+        price: 77500,
+        category: "Dateless",
+    },
+    {
+        id: 16,
+        number: "1 HOE",
+        price: 29995,
+        category: "Other",
+    },
+    {
+        id: 17,
+        number: "WS 1",
+        price: 325000,
+        category: "Dateless",
+    },
+    {
+        id: 18,
+        number: "4000 OO",
+        price: 23000,
+        category: "Dateless",
+    },
+    {
+        id: 19,
+        number: "420 OO",
+        price: 20000,
+        category: "Dateless",
+    },
+    {
+        id: 20,
+        number: "44 O",
+        price: 130000,
+        category: "Dateless",
+    },
+    {
+        id: 21,
+        number: "95 O",
+        price: 130000,
+        category: "Dateless",
+    },
+    {
+        id: 22,
+        number: "36 M",
+        price: 69995,
+        category: "Dateless",
+    },
+    {
+        id: 23,
+        number: "KS 6",
+        price: 89995,
+        category: "Dateless",
+    },
+    {
+        id: 24,
+        number: "73 AA",
+        price: 27995,
+        category: "Dateless",
+    },
+    {
+        id: 25,
+        number: "67 C",
+        price: 59995,
+        category: "Dateless",
     }
-]
+];
+
 
 const categories = ["All", ...new Set(plates.map(plate => plate.category))]
 
