@@ -14,13 +14,13 @@ const plates = [
     {
         id: 1,
         number: "S1 TAL",
-        price: 22000,
+        price: 21995,
         category: "Other",
     },
     {
         id: 2,
         number: "KAM 1E",
-        price: 8000,
+        price: 7995,
         category: "Other",
     },
     {
