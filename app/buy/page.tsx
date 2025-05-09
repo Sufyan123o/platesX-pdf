@@ -160,6 +160,12 @@ const plates = [
         number: "67 C",
         price: 59995,
         category: "Dateless",
+    },
+    {
+        id: 26,
+        number: "52 W",
+        price: 49995,
+        category: "Dateless",
     }
 ];
 
@@ -168,7 +174,7 @@ const categories = ["All", ...new Set(plates.map(plate => plate.category))]
 
 export default function BuyPage() {
     const [selectedPlate, setSelectedPlate] = useState("")
-    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc")
+    const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc")
     
     const scrollToSection = (elementId: string) => {
         const element = document.getElementById(elementId)
@@ -240,7 +246,7 @@ export default function BuyPage() {
                                                         />
                                                     </div>
                                                     <CardDescription className="text-center">
-                                                        {plate.description}
+                                                        {plate.category}
                                                     </CardDescription>
                                                 </CardHeader>
                                                 <CardContent>                                                    <div className="text-center">                                                        <p className="text-xl font-semibold">
